@@ -39,7 +39,7 @@ The rest:
 
 ## What's included
 
-6 pages: Threshold Church, Give, Locations, Messages, Next steps, I'm new.
+6 pages: Home, Give, Locations, Messages, Next steps, I'm new.
 
 Self-contained: the typefaces are bundled and self-hosted, the CSS and JS ship with the template, and there are no external requests, no build step for the assets, and no tracking. Dark mode is included and respects the system setting.
 
@@ -51,7 +51,7 @@ Pages build to `about.html` rather than `/about/`. The template's own runtime de
 
 MIT — see [LICENSE](LICENSE). Use it for your church, for a client, commercially, whatever. Attribution appreciated, not required. Bundled typefaces are SIL OFL 1.1; see `core/fonts/FONTS.md`.
 
-Photography in the live demo is from Unsplash and is credited in `CREDITS.md`; the download ships neutral placeholders instead.
+The photographs are from [Unsplash](https://unsplash.com/) under the [Unsplash Licence](https://unsplash.com/license), which permits free use, modification and distribution, including commercially. Every photographer is credited in `CREDITS.md`. Replace them with pictures of your own church when you have them.
 
 ---
 

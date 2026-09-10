@@ -1,6 +1,6 @@
 # Threshold — a free church website template for Jekyll
 
-Sundays at 9 & 11am on Riverside, 11am in East Austin. A church for people who thought church wasn't for them.
+A free website template for church plants, multisite churches and contemporary congregations. A fixed side rail instead of a hero, pages for locations, next steps and messages, and a layout that stays legible when a church meets in three places at two times. Self-hosted typefaces, dark mode, and no external requests.
 
 **[Live demo](https://churchcreation.com/demo/threshold/)** · **[About this template](https://churchcreation.com/templates/threshold/)** · 6 pages · MIT
 

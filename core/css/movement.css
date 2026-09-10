@@ -1,0 +1,414 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   FAMILY — MOVEMENT
+   Pentecostal · charismatic · multi-site · church plants · youth & college
+
+   Contemporary churches whose website is a front door, not an archive. The
+   research bears this out: HTB, Heritage, Elevation, Second, Mariners all open
+   with one enormous photograph of people, a mission line set over it in heavy
+   type, and two CTAs. That much is the category.
+
+   Where this family departs from every one of them — and from the design
+   language a machine reaches for by default — is the source. Contemporary
+   church sites are almost universally set in Poppins or Montserrat on white,
+   with pill buttons and soft shadows. Ours is a REVIVAL BROADSIDE: newsprint
+   ground, heavy condensed wood type, flat spot colour, hard rules, no radii
+   anywhere. Tent-meeting handbills and gospel posters are the actual visual
+   history of this tradition, and nobody is using it.
+
+   Explicitly not: gradients, glass, soft shadows, pill buttons, cream + serif
+   + terracotta, near-black + acid green, purple-to-blue anything.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --font-display: "Archivo Narrow", "Arial Narrow", Impact, sans-serif;
+  --font-body:    "Public Sans", ui-sans-serif, -apple-system, "Segoe UI", sans-serif;
+
+  /* Newsprint, not cream. Warmer and greyer than paper — the ground a
+     two-colour handbill was actually printed on. */
+  --plaster-100: #F1EDE4;
+  --plaster-200: #E5DFD3;
+  --plaster-300: #DFD8CA;
+  --plaster-400: #B9B1A0;
+  --ink:         #191712;
+
+  /* One spot colour, flat. 5.22:1 on newsprint, 6.92:1 under white. */
+  --spot: #A82B22;
+
+  --bg:          var(--plaster-200);
+  --bg-raised:   var(--plaster-100);
+  --bg-sunken:   var(--plaster-300);
+  --fg:          var(--ink);
+  --fg-muted:    #5E594E;
+  --line:        var(--plaster-400);
+  --line-strong: var(--ink);
+
+  --accent:      var(--spot);
+  --accent-fg:   #FFFFFF;
+
+  /* A poster is set larger and tighter than a book. */
+  --t-base: 1.0625rem;
+  --t-lg:   clamp(1.4rem,  1.1rem + 1.2vw, 1.8rem);
+  --t-xl:   clamp(1.9rem,  1.4rem + 2.4vw, 2.8rem);
+  --t-2xl:  clamp(2.1rem,  1.5rem + 2.8vw, 3.2rem);
+  --t-3xl:  clamp(2.4rem,  1.5rem + 4.2vw, 4.8rem);
+
+  --leading-tight: 0.92;
+  --leading-body:  1.58;
+
+  /* Nothing in a letterpress shop has a rounded corner. */
+  --radius: 0;
+  --radius-arch: 0;
+  --shadow: none;
+
+  --border:        1px solid var(--line);
+  --border-strong: 3px solid var(--ink);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:          #17181A;
+    --bg-raised:   #1F2023;
+    --bg-sunken:   #101113;
+    --fg:          #EDE8DC;
+    --fg-muted:    #9A958A;
+    --line:        #34363A;
+    --line-strong: #EDE8DC;
+    --spot:        #F0655A;   /* 5.68:1 both ways on the dark ground */
+    --accent-fg:   #17181A;
+    --border-strong: 3px solid #EDE8DC;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #17181A; --bg-raised: #1F2023; --bg-sunken: #101113;
+  --fg: #EDE8DC; --fg-muted: #9A958A; --line: #34363A; --line-strong: #EDE8DC;
+  --spot: #F0655A; --accent-fg: #17181A;
+  --border-strong: 3px solid #EDE8DC;
+}
+:root[data-theme="light"] {
+  --bg: #E5DFD3; --bg-raised: #F1EDE4; --bg-sunken: #DFD8CA;
+  --fg: #191712; --fg-muted: #5E594E; --line: #B9B1A0; --line-strong: #191712;
+  --spot: #A82B22; --accent-fg: #FFFFFF;
+  --border-strong: 3px solid #191712;
+}
+
+/* ── Display type ───────────────────────────────────────────────────────────
+   Uppercase, condensed, set as large as the box allows and packed tight. This
+   is the family's whole personality; everything else is quiet around it. */
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  line-height: var(--leading-tight);
+  text-wrap: balance;
+}
+h4, h5, h6 {
+  font-family: var(--font-body);
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1.25;
+}
+
+/* ── The rule ───────────────────────────────────────────────────────────────
+   The family's structural device, in place of Cornerstone's arch. A broadside
+   is organised by rules, not by boxes. */
+.rule {
+  block-size: 3px;
+  background: var(--fg);
+  margin-block: var(--s-6);
+}
+.rule--hair { block-size: 1px; background: var(--line); }
+.rule--spot { background: var(--accent); }
+
+/* ── Section numerals ───────────────────────────────────────────────────────
+   Legitimate here: a next-steps ladder IS a sequence, and a poster numbers
+   its bill. Set outline so they sit behind the heading rather than shout. */
+.numeral {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 0.8;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--accent);
+  font-variant-numeric: lining-nums;
+}
+
+/* ── Buttons: square, heavy, and they mean it ───────────────────────────── */
+.btn {
+  border-radius: 0;
+  border-width: 2px;
+  font-family: var(--font-display);
+  font-size: var(--t-base);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  padding-inline: var(--s-6);
+}
+.btn--ghost { border-color: var(--fg); }
+
+/* ── Headings sit hard against a rule ───────────────────────────────────── */
+.section-head {
+  border-block-start: var(--border-strong);
+  padding-block-start: var(--s-4);
+}
+.section-head .label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+/* ── Nav takes the display face too ─────────────────────────────────────── */
+.site-header { border-block-end: var(--border-strong); }
+.site-header__brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  font-size: var(--t-lg);
+}
+.site-nav a, .nav-toggle {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 0;
+}
+
+/* ── Hero: type runs to the edges ───────────────────────────────────────── */
+.hero__title {
+  font-size: var(--t-3xl);
+  max-inline-size: 14ch;
+  letter-spacing: -0.015em;
+}
+.hero__lede {
+  font-family: var(--font-body);
+  font-size: var(--t-md);
+  max-inline-size: 46ch;
+}
+.hero__bar a { font-family: var(--font-display); text-transform: uppercase; }
+.hero__bar span { font-size: var(--t-base); letter-spacing: 0.03em; }
+
+/* ── Service times read as a bill of times ──────────────────────────────── */
+.service__time {
+  font-family: var(--font-display);
+  font-size: var(--t-xl);
+  font-weight: 700;
+  color: var(--fg);
+}
+.service__name {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: var(--t-lg);
+  color: var(--accent);
+}
+
+/* ── Cards are blocks, not cards ────────────────────────────────────────── */
+.card { border: var(--border-strong); border-radius: 0; }
+.pathway { border-block-start-width: 6px; }
+
+/* ── Forced colours ─────────────────────────────────────────────────────── */
+@media (forced-colors: active) {
+  .numeral { -webkit-text-stroke-color: CanvasText; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOVEMENT CHROME — its own page architecture, not the classic one.
+
+   Cornerstone's page is a top bar, a full-bleed hero with text over a scrim,
+   then a stack of centred sections. That is right for a parish church, where
+   the site is a place you visit.
+
+   A church plant's site has ONE job: get somebody through the door on Sunday.
+   So the architecture is different in kind:
+
+     · a BILL RAIL fixed down the left — name, next service, primary CTA and
+       nav, permanently on screen. The single most important information never
+       scrolls away.
+     · a SHEET beside it, laid out as a pasted-up poster wall: plates at
+       varied column spans, photographs pasted ON the sheet as objects rather
+       than sitting behind text, occasional slight rotation.
+
+   Nothing here is a scrim, a card, or a centred section.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.layout {
+  --rail: 21rem;
+  display: grid;
+  grid-template-columns: var(--rail) minmax(0, 1fr);
+  min-block-size: 100vh;
+}
+
+/* ── The bill rail ──────────────────────────────────────────────────────── */
+.rail {
+  position: sticky;
+  inset-block-start: 0;
+  block-size: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+  padding: var(--s-6) var(--s-5);
+  background: var(--fg);
+  color: var(--bg);
+  border-inline-end: 3px solid var(--fg);
+  overflow-y: auto;
+}
+.rail__brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(1.6rem, 2vw, 2.1rem);
+  line-height: 0.94;
+  letter-spacing: -0.015em;
+  color: var(--bg);
+  text-decoration: none;
+}
+.rail__brand small {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--t-xs);
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-block-start: var(--s-2);
+}
+
+.rail__next {
+  border-block: 3px solid var(--accent);
+  padding-block: var(--s-4);
+}
+.rail__next .label { color: var(--accent); opacity: 1; }
+.rail__next strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--t-lg);
+  text-transform: uppercase;
+  line-height: 1.05;
+  margin-block-start: var(--s-2);
+}
+.rail__next span { font-size: var(--t-sm); opacity: 0.72; }
+
+.rail nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.rail nav a {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: var(--t-md);
+  padding-block: var(--s-2);
+  text-decoration: none;
+  color: var(--bg);
+  opacity: 0.72;
+}
+.rail nav a:hover, .rail nav a[aria-current="page"] { opacity: 1; color: var(--accent); }
+
+.rail__cta {
+  margin-block-start: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+.rail__foot { font-size: var(--t-xs); opacity: 0.5; line-height: 1.5; }
+.rail__foot a { color: inherit; }
+
+/* ── The sheet ──────────────────────────────────────────────────────────────
+   A twelve-column paste-up. Plates take deliberately uneven spans so the page
+   reads as posted bills rather than a stack of equal blocks. */
+.sheet {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--s-6) var(--s-5);
+  align-content: start;
+  padding: var(--s-7) var(--s-7) var(--s-9);
+}
+.plate { grid-column: span 12; }
+.plate--wide  { grid-column: span 9; }
+.plate--half  { grid-column: span 6; }
+.plate--third { grid-column: span 4; }
+.plate--push  { grid-column: 4 / span 9; }
+
+.plate__title {
+  font-size: var(--t-2xl);
+  border-block-start: 6px solid var(--fg);
+  padding-block-start: var(--s-3);
+}
+.plate__kicker {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--t-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  display: block;
+  margin-block-end: var(--s-2);
+}
+.plate__body { margin-block-start: var(--s-4); max-inline-size: 46ch; }
+
+/* Pasted photograph: an object ON the sheet, torn slightly off-square. */
+.paste { display: block; border: 3px solid var(--fg); background: var(--bg-sunken); }
+/* [width][height] is load-bearing. base.css loads AFTER the family stylesheet
+   and carries `img[width][height] { block-size: auto }` at equal specificity,
+   which otherwise wins and leaves the panel half empty. */
+.paste picture { display: block; inline-size: 100%; }
+.paste img[width][height] { inline-size: 100%; block-size: auto; display: block; }
+.paste--tilt-l { rotate: -1.4deg; }
+.paste--tilt-r { rotate: 1.1deg; }
+@media (prefers-reduced-motion: reduce) { .paste { rotate: none !important; } }
+
+/* ── Opening plate: type on the sheet, photograph pasted beside it ───────── */
+.opening { grid-column: span 12; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--s-5); align-items: end; }
+.opening__type { grid-column: span 7; }
+.opening__type h1 {
+  font-size: clamp(2.6rem, 1.4rem + 4.6vw, 5.6rem);
+  letter-spacing: -0.02em;
+}
+.opening__lede { font-family: var(--font-body); font-size: var(--t-md); max-inline-size: 40ch; margin-block-start: var(--s-4); }
+/* No forced aspect: these panels are type, and cropping a 21:9 broadside to
+   4:5 cuts the words in half. Let the panel be the shape it is. */
+.opening__paste { grid-column: span 5; align-self: center; }
+
+/* ── Times, set as a printed bill ───────────────────────────────────────── */
+.bill { border-block-start: 6px solid var(--fg); }
+.bill__row {
+  display: grid;
+  /* 6rem wrapped "11 AM" onto two lines at display size. */
+  grid-template-columns: minmax(8rem, auto) 1fr auto;
+  gap: var(--s-4);
+  align-items: baseline;
+  padding-block: var(--s-4);
+  border-block-end: 1px solid var(--line);
+}
+.bill__time { font-family: var(--font-display); font-weight: 700; font-size: var(--t-xl); font-variant-numeric: tabular-nums; }
+.bill__what { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: var(--t-lg); color: var(--accent); }
+.bill__note { font-size: var(--t-sm); color: var(--fg-muted); }
+.bill__day  { font-family: var(--font-display); font-size: var(--t-sm); text-transform: uppercase; letter-spacing: .1em; color: var(--fg-muted); }
+
+/* ── Mobile: the rail becomes a top bar plus a sticky CTA ───────────────── */
+@media (max-width: 62rem) {
+  .layout { grid-template-columns: 1fr; }
+  .rail {
+    position: static;
+    block-size: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-4);
+    border-inline-end: none;
+    border-block-end: 3px solid var(--fg);
+    padding: var(--s-4) var(--s-5);
+  }
+  .rail__next, .rail__foot { display: none; }
+  .rail__cta { margin-block-start: 0; margin-inline-start: auto; flex-direction: row; }
+  .rail nav { inline-size: 100%; }
+  .rail nav ul { flex-direction: row; flex-wrap: wrap; gap: var(--s-4); }
+  .rail nav a { font-size: var(--t-sm); padding-block: 0; }
+  .sheet { padding: var(--s-6) var(--s-5) var(--s-8); gap: var(--s-6) var(--s-4); }
+  .opening__type, .opening__paste { grid-column: span 12; }
+  .plate--wide, .plate--half, .plate--third, .plate--push { grid-column: span 12; }
+}
+@media (max-width: 40rem) {
+  .bill__row { grid-template-columns: 1fr; gap: var(--s-1); }
+}

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page.title | escape }}</title>
+<meta name="description" content="{{ page.description | escape }}">
+
+<link rel="preload" href="./core/fonts/archivonarrow-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="./core/css/fonts.css">
+<link rel="stylesheet" href="./core/css/tokens.css">
+<link rel="stylesheet" href="./core/css/movement.css">
+<link rel="stylesheet" href="./core/css/base.css">
+<link rel="stylesheet" href="./core/css/components.css">
+<link rel="stylesheet" href="./core/css/motion.css">
+<link rel="stylesheet" href="./core/css/viz.css">
+<link rel="stylesheet" href="assets/template.css">
+
+<script type="module">
+  const t = localStorage.getItem('theme');
+  if (t) document.documentElement.dataset.theme = t;
+</script>
+</head>
+
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<svg class="icon-sprite" aria-hidden="true" focusable="false" width="0" height="0">
+  <symbol id="i-contrast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18Z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M3 12h16M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path d="M6 18L18 6M8 6h10v10"/></symbol>
+  <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="M4 9l8 7 8-7"/></symbol>
+  <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4L11 13M18 14v6H4V6h6"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6 3h3.5L11 7.5 8.6 9.2a12.5 12.5 0 0 0 6.2 6.2L16.5 13l4.5 1.5V18a2.5 2.5 0 0 1-2.5 2.5A15.5 15.5 0 0 1 3.5 5.5 2.5 2.5 0 0 1 6 3Z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path d="M3 5h18v14H3zM3 6l9 6.5L21 6"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6.5V12l4 2.5"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M4 6h16v15H4zM4 10.5h16M8.5 3v4M15.5 3v4"/></symbol>
+  <symbol id="i-print" viewBox="0 0 24 24"><path d="M7 8V3h10v5M4 8h16v8h-3M7 16H4M7 13h10v8H7z"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8Z"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12M7 11l5 5 5-5M3 21h18"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6v15M12 6a5 5 0 0 0-5-3H3v15h4a5 5 0 0 1 5 3 5 5 0 0 1 5-3h4V3h-4a5 5 0 0 0-5 3Z"/></symbol>
+  <symbol id="i-note" viewBox="0 0 24 24"><path d="M9 17V4l11-2v13"/><ellipse cx="6" cy="17.5" rx="3" ry="2.5"/><ellipse cx="17" cy="15.5" rx="3" ry="2.5"/></symbol>
+</svg>
+
+<div class="layout">
+
+  <!-- ── The bill rail ────────────────────────────────────────────────────
+       Fixed for the whole session on desktop. This site has one job — get
+       somebody through the door on Sunday — so the times and the primary CTA
+       never scroll away. -->
+  <aside class="rail">
+    <a class="rail__brand" href="index.html">
+      <span data-church="shortName">Threshold</span>
+      <small data-church="@address">Austin, TX</small>
+    </a>
+
+    <div class="rail__next">
+      <span class="label">Next service</span>
+      <strong data-next-service>Sunday, 9am</strong>
+    </div>
+
+    <nav aria-label="Primary">
+      <ul>
+{%- for item in site.data.nav %}
+        <li><a href="{{ item.href }}"{% if item.href == page.current %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
+{%- endfor %}
+      </ul>
+    </nav>
+
+    <div class="rail__cta">
+      <a class="btn" href="visit.html">Plan a visit</a>
+      <button class="theme-toggle" type="button" aria-label="Switch theme"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-contrast"/></svg></button>
+    </div>
+
+    <p class="rail__foot">
+      <span data-church="phone">&nbsp;</span><br>
+      Threshold — a free template from
+      <a href="https://churchcreation.com/templates/threshold/">ChurchCreation</a>
+    </p>
+  </aside>
+
+{{ content }}
+
+</div>
+
+<script type="module">
+  import { loadConfig, hydrate } from './core/js/config.js';
+  import { injectSchema } from './core/js/schema.js';
+  import { initTheme, initCurrentPage, initLiveStream } from './core/js/ui.js';
+  import { initViz } from './core/js/viz.js';
+  import { initReveal } from './core/js/reveal.js';
+
+  const config = await loadConfig();
+  hydrate(config);
+  injectSchema(config);
+  initTheme();
+  initCurrentPage('.rail nav a');
+  initLiveStream(config);
+  initViz(config);
+  initReveal();
+</script>
+</body>
+</html>

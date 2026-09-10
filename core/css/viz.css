@@ -1,0 +1,282 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   VIZ — the year wheel, magnitude bars, stat figures, photo treatments.
+
+   Marks are thin, grids recessive, fills separated by a surface-coloured gap.
+   Text always wears text tokens; a coloured mark beside it carries identity.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── The liturgical year wheel ──────────────────────────────────────────────
+   The one place the liturgical colours are used as a set. Colour here is the
+   subject, not an encoding, and every arc is directly labelled. */
+/* margin-inline:auto because the SVG is capped at 30rem and its host is not.
+   Without it the drawing sits at the left of whatever box it is given, which
+   is invisible in a two-column layout and obvious the moment it stacks. */
+.wheel { inline-size: 100%; max-inline-size: 30rem; block-size: auto; margin-inline: auto; }
+
+.wheel__arc {
+  stroke: var(--bg);
+  stroke-width: 1.5;
+  cursor: pointer;
+  transition: opacity var(--transition);
+}
+.wheel__arc:hover, .wheel__arc:focus-visible { opacity: 0.82; }
+.wheel__arc:focus-visible { outline: none; stroke: var(--fg); stroke-width: 2.5; }
+
+.wheel__arc--advent    { fill: var(--lit-violet);  }
+.wheel__arc--christmas { fill: var(--lit-gold);    }
+.wheel__arc--epiphany  { fill: var(--lit-green);   }
+.wheel__arc--lent      { fill: var(--lit-violet);  }
+.wheel__arc--holyweek  { fill: var(--lit-oxblood); }
+.wheel__arc--easter    { fill: var(--lit-gold);    }
+.wheel__arc--pentecost { fill: var(--lit-oxblood); }
+.wheel__arc--ordinary  { fill: var(--lit-green);   }
+
+/* Lent and Advent share violet, Eastertide and Christmas share gold. They are
+   never adjacent, and each is labelled — but a hairline keeps the boundary
+   legible where two same-coloured arcs would otherwise merge. */
+.wheel__label {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  fill: #fff;
+  paint-order: stroke;
+  stroke: rgb(0 0 0 / 0.28);
+  stroke-width: 2.5px;
+  pointer-events: none;
+}
+
+.wheel__ticks line { stroke: var(--line); stroke-width: 1; }
+.wheel__ticks text {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  fill: var(--fg-muted);
+}
+
+.wheel__now { stroke: var(--fg); stroke-width: 2; }
+.wheel__now-dot { fill: var(--fg); }
+
+.wheel__center-label {
+  font-family: var(--font-ui); font-size: 10px; font-weight: 600;
+  letter-spacing: 0.16em; fill: var(--fg-muted);
+}
+.wheel__center-name {
+  font-family: var(--font-display); font-size: 22px; font-weight: 600; fill: var(--fg);
+}
+.wheel__center-sub {
+  font-family: var(--font-ui); font-size: 11px; fill: var(--fg-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Magnitude bars ─────────────────────────────────────────────────────────
+   One hue, because there is one measure. The category name does the
+   identifying, so there is nothing for a legend to say. */
+.bars { margin: 0; display: flex; flex-direction: column; gap: var(--s-4); }
+.bars__rows { display: flex; flex-direction: column; gap: var(--s-1); }
+
+.bars__row {
+  display: grid;
+  grid-template-columns: minmax(7rem, 12rem) 1fr 3.2rem;
+  gap: var(--s-4);
+  align-items: center;
+  padding-block: var(--s-2);
+  border-radius: var(--radius);
+}
+.bars__row:hover { background: var(--bg-sunken); }
+.bars__row:focus-visible { outline: var(--focus); outline-offset: 1px; }
+
+.bars__name { font-size: var(--t-sm); }
+.bars__track { block-size: 0.75rem; background: var(--bg-sunken); border-radius: 0 2px 2px 0; }
+.bars__fill {
+  display: block;
+  block-size: 100%;
+  background: var(--accent);
+  /* 4px rounded data-end, anchored square to the baseline */
+  border-radius: 0 4px 4px 0;
+  min-inline-size: 3px;
+}
+.bars__value {
+  font-family: var(--font-ui);
+  font-size: var(--t-sm);
+  font-weight: 600;
+  text-align: end;
+  color: var(--fg);
+}
+
+.bars figcaption {
+  font-family: var(--font-ui);
+  font-size: var(--t-xs);
+  color: var(--fg-muted);
+  max-inline-size: var(--measure);
+}
+
+.bars__table summary {
+  font-family: var(--font-ui);
+  font-size: var(--t-xs);
+  color: var(--fg-muted);
+  cursor: pointer;
+  padding-block: var(--s-2);
+}
+.bars__table summary:hover { color: var(--fg); }
+.bars__table table { font-size: var(--t-sm); margin-block-start: var(--s-2); }
+
+@media (max-width: 34rem) {
+  .bars__row { grid-template-columns: 1fr 3rem; grid-template-areas: "name value" "track track"; }
+  .bars__name { grid-area: name; }
+  .bars__value { grid-area: value; }
+  .bars__track { grid-area: track; }
+}
+
+/* ── Tooltip ────────────────────────────────────────────────────────────── */
+.viz-tip {
+  position: absolute;
+  z-index: 20;
+  translate: -50% -100%;
+  padding: var(--s-2) var(--s-3);
+  background: var(--fg);
+  color: var(--bg);
+  border-radius: var(--radius);
+  font-family: var(--font-ui);
+  font-size: var(--t-xs);
+  line-height: 1.45;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition);
+  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.viz-tip[data-show] { opacity: 1; }
+.viz-tip strong { font-weight: 600; }
+.viz-tip span { opacity: 0.78; }
+
+.viz-host { position: relative; }
+
+/* ── The wheel beside a column of prose ──────────────────────────────────────
+   Two templates lay the year wheel out this way, so it lives here with the
+   wheel rather than being copied into a second template's stylesheet.
+
+   ⚠ IT IS NOT CALLED .wheel, AND THAT MATTERS. `.wheel` is the SVG ITSELF
+   (see the top of this file). Canterbury named its two-column wrapper `.wheel`
+   and the SVG inherited `display: grid; grid-template-columns: 1fr 1fr`,
+   which laid its <text> children out as grid items — the year rendered as a
+   list reading "Jan Feb Mar Apr". Nothing threw, nothing 404'd, and the
+   element was present and non-zero, so every existing check passed. */
+.year-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 30rem) minmax(0, 1fr);
+  gap: var(--s-7);
+  align-items: center;
+}
+/* ── Stacked ──────────────────────────────────────────────────────────────
+   ⚠ CENTRE THE TRACK, don't just collapse it. `grid-template-columns: 1fr`
+   alone left both blocks hard against the left edge with the entire right
+   half of the band empty — the prose still capped at its 30rem column width
+   because that is what it was written for. A one-column grid needs to be told
+   where to put the column, and a reading measure needs to stop being a
+   left-hand column the moment it is the only one. */
+@media (max-width: 56rem) {
+  .year-layout {
+    grid-template-columns: minmax(0, 40rem);
+    justify-content: center;
+    justify-items: center;
+    gap: var(--s-6);
+  }
+  .year-layout > * { inline-size: 100%; max-inline-size: 40rem; }
+  .year-layout .viz-host { justify-self: center; }
+}
+
+/* ── Stat figures ───────────────────────────────────────────────────────────
+   Hero numbers, not charts. A single number is better served by type than by
+   a bar of length one. */
+.figures {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 0;
+  border-block-start: var(--border-strong);
+}
+.figure {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  padding: var(--s-5) var(--s-4) var(--s-5) 0;
+  border-block-end: var(--border);
+}
+.figure__value {
+  font-family: var(--font-display);
+  font-size: var(--t-2xl);
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--accent);
+}
+.figure__label { font-size: var(--t-sm); }
+.figure__note { font-family: var(--font-ui); font-size: var(--t-xs); color: var(--fg-muted); }
+
+/* ── Week grid ──────────────────────────────────────────────────────────────
+   What happens across a week, at a glance. Not a heatmap — the cells are
+   events, not magnitudes. */
+.week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 1px; background: var(--line); border: var(--border); }
+.week__day { background: var(--bg); padding: var(--s-3) var(--s-2); display: flex; flex-direction: column; gap: var(--s-2); min-block-size: 7rem; }
+.week__name {
+  font-family: var(--font-ui); font-size: var(--t-xs); font-weight: 600;
+  text-transform: uppercase; letter-spacing: var(--tracking-label); color: var(--fg-muted);
+}
+.week__item {
+  font-size: var(--t-xs);
+  padding: var(--s-2);
+  background: var(--accent-weak);
+  border-inline-start: 2px solid var(--accent);
+}
+.week__item b { display: block; font-family: var(--font-ui); font-variant-numeric: tabular-nums; }
+@media (max-width: 48rem) {
+  .week { grid-template-columns: 1fr; }
+  .week__day:empty { display: none; }
+}
+
+/* ── Photography ────────────────────────────────────────────────────────────
+   Churches supply their own photographs, taken on a phone by a volunteer.
+   These treatments make ordinary photographs look deliberate: an arch mask,
+   and a duotone in the season's colour for the ones that aren't good enough
+   to stand on their own. */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: var(--s-3);
+}
+.gallery figure { margin: 0; }
+.gallery img { inline-size: 100%; block-size: 100%; object-fit: cover; }
+
+.frame { overflow: hidden; background: var(--bg-sunken); }
+.frame--arch { border-start-start-radius: 50%; border-start-end-radius: 50%; }
+.frame--tall { aspect-ratio: 3 / 4; }
+.frame--wide { aspect-ratio: 3 / 2; }
+.frame--square { aspect-ratio: 1; }
+
+/* Duotone: greyscale the photograph, then tint it with the season colour.
+   Multiply keeps the darks honest; the accent supplies the hue. */
+.frame--duotone { position: relative; }
+.frame--duotone img { filter: grayscale(1) contrast(1.08); }
+.frame--duotone::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  mix-blend-mode: multiply;
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .gallery a img { transition: scale 320ms cubic-bezier(.4,0,.2,1); }
+  .gallery a:hover img { scale: 1.03; }
+}
+
+/* ── Forced colours ─────────────────────────────────────────────────────── */
+@media (forced-colors: active) {
+  .wheel__arc { fill: Canvas; stroke: CanvasText; }
+  .bars__fill { background: Highlight; }
+  .frame--duotone::after { display: none; }
+}

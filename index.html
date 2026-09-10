@@ -1,0 +1,86 @@
+---
+layout: default
+title: "Threshold Church — Austin, TX"
+description: "Sundays at 9 & 11am on Riverside, 11am in East Austin. A church for people who thought church wasn't for them."
+permalink: /index.html
+current: index.html
+---
+<main class="sheet" id="main">
+
+    <div class="opening" data-reveal>
+      <div class="opening__type">
+        <h1 data-church="tagline">A church for people who thought church wasn't for them.</h1>
+        <p class="opening__lede">
+          Sundays at 9 &amp; 11 on Riverside, 11 in East Austin, and live online.
+          Come as late as you like and leave as early as you need to.
+        </p>
+      </div>
+      <figure class="paste paste--tilt-l opening__paste">
+      <picture>
+        <source type="image/avif" srcset="assets/img/hero.avif">
+        <img src="assets/img/hero.jpg" data-slot="hero" width="1040" height="1300" alt="The room on a Sunday morning." loading="lazy">
+      </picture>
+    </figure>
+    </div>
+
+    <section class="plate plate--wide" data-reveal>
+      <span class="plate__kicker">This Sunday</span>
+      <h2 class="plate__title">When and where</h2>
+      <div style="margin-block-start:var(--s-4)"><div class="bill" data-church-list="services">
+        <template>
+          <div class="bill__row">
+            <div class="bill__time" data-item="time">11 AM</div>
+            <div>
+              <div class="bill__what" data-item="label">Riverside</div>
+              <div class="bill__note" data-item="note" data-item-optional></div>
+            </div>
+            <div class="bill__day" data-item="day">Sunday</div>
+          </div>
+        </template>
+      </div></div>
+    </section>
+
+    <section class="plate plate--push" data-reveal>
+      <span class="plate__kicker">Next steps</span>
+      <h2 class="plate__title">Nobody expects you to do all of this</h2>
+      <ol class="ladder" data-church-list="steps">
+        <template>
+          <li class="rung">
+            <span class="rung__n" data-item="n">01</span>
+            <div>
+              <h3 class="rung__name" data-item="name">Come once</h3>
+              <p class="rung__body" data-item="body"></p>
+            </div>
+          </li>
+        </template>
+      </ol>
+      <p style="margin-block-start:var(--s-5)"><a class="btn" href="steps.html">Start somewhere</a></p>
+    </section>
+
+    <section class="plate plate--half" data-reveal>
+      <span class="plate__kicker">Last year</span>
+      <h2 class="plate__title">What actually happened</h2>
+      <div class="tally" data-figures></div>
+    </section>
+
+    <div class="plate--half">
+      <figure class="paste paste--tilt-r">
+      <picture>
+        <source type="image/avif" srcset="assets/img/series-3.avif">
+        <img src="assets/img/series-3.jpg" data-slot="series-3" width="1200" height="900" alt="Sunday morning, from the back of the room." loading="lazy">
+      </picture>
+    </figure>
+    </div>
+
+    <section class="plate plate--wide" data-reveal>
+      <span class="plate__kicker">Giving</span>
+      <h2 class="plate__title">Where the money goes</h2>
+      <div class="plate__body">
+        <p>We publish the whole breakdown because you should not have to ask.
+           Nearly a fifth of everything given leaves the building.</p>
+        <p style="margin-block-start:var(--s-4)"><a class="btn" href="give.html">The full accounts</a></p>
+      </div>
+      <div class="viz-host" data-bars="stewardship.breakdown" data-unit="%" style="margin-block-start:var(--s-5)"></div>
+    </section>
+
+  </main>

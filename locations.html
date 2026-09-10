@@ -1,0 +1,69 @@
+---
+layout: default
+title: "Locations — Threshold Church"
+description: "Riverside, East Austin and online. Times, addresses, parking and what to expect at each."
+permalink: /locations.html
+current: locations.html
+---
+<main class="sheet" id="main">
+
+    <div class="opening" data-reveal>
+      <div class="opening__type">
+        <span class="plate__kicker">Locations</span>
+        <h1>Three rooms, one church</h1>
+        <p class="opening__lede">Same teaching, same values, three very different rooms.</p>
+      </div>
+      <figure class="paste paste--tilt-l opening__paste">
+      <picture>
+        <source type="image/avif" srcset="assets/img/locations.avif">
+        <img src="assets/img/locations.jpg" data-slot="locations" width="1200" height="504" alt="The auditorium at Riverside." loading="lazy">
+      </picture>
+    </figure>
+    </div>
+
+    <section class="plate" data-reveal>
+      <div class="places" data-church-list="campuses">
+        <template>
+          <article class="place">
+            <h2 class="place__name" data-item="name">Riverside</h2>
+            <p class="place__times" data-item="times">Sundays 9 &amp; 11am</p>
+            <p class="place__addr" data-item="address"></p>
+            <p class="place__note" data-item="note"></p>
+            <p><a class="btn btn--ghost" href="#" data-church-href="@maps">Directions</a></p>
+          </article>
+        </template>
+      </div>
+    </section>
+
+    <section class="plate plate--wide" data-reveal>
+      <span class="plate__kicker">Every service</span>
+      <h2 class="plate__title">The full week</h2>
+      <div style="margin-block-start:var(--s-4)"><div class="bill" data-church-list="services">
+        <template>
+          <div class="bill__row">
+            <div class="bill__time" data-item="time">11 AM</div>
+            <div>
+              <div class="bill__what" data-item="label">Riverside</div>
+              <div class="bill__note" data-item="note" data-item-optional></div>
+            </div>
+            <div class="bill__day" data-item="day">Sunday</div>
+          </div>
+        </template>
+      </div></div>
+    </section>
+
+    <section class="plate plate--half" data-reveal>
+      <span class="plate__kicker">Contact</span>
+      <h2 class="plate__title">Reach a human</h2>
+      <form class="stack" action="#" method="post" style="margin-block-start:var(--s-4)">
+        <p class="plate__body" style="margin-block-start:0">This goes to a person, not a mailing list, and you will hear back inside a working day.</p>
+        <div class="form-grid">
+          <div><label for="n">Your name</label><input id="n" name="name" type="text" autocomplete="name" required></div>
+          <div><label for="e">Email</label><input id="e" name="email" type="email" autocomplete="email" required></div>
+          <div class="form-field--full"><label for="m">What's up? <span class="req">optional</span></label><textarea id="m" name="message" rows="4"></textarea></div>
+        </div>
+        <button class="btn" type="submit">Send</button>
+      </form>
+    </section>
+
+  </main>

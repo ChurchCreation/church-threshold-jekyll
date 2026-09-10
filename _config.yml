@@ -3,6 +3,6 @@ description: "Sundays at 9 & 11am on Riverside, 11am in East Austin. A church fo
 
 # The template's own assets are copied through untouched.
 include: ['church.config.json']
-exclude: ['README.md', 'LICENSE', 'Gemfile', 'Gemfile.lock', 'vendor']
+exclude: ['README.md', 'LICENSE', 'Gemfile', 'Gemfile.lock', 'vendor', 'images']
 sass:
   style: compressed

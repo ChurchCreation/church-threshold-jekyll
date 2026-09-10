@@ -4,6 +4,12 @@ A free website template for church plants, multisite churches and contemporary c
 
 **[Live demo](https://churchcreation.com/demo/threshold/)** · **[About this template](https://churchcreation.com/templates/threshold/)** · 6 pages · MIT
 
+![Home page](images/preview.jpg)
+
+| Dark mode | On a phone |
+|---|---|
+| ![The same page in dark mode](images/preview-dark.jpg) | ![The same page on a phone](images/preview-mobile.jpg) |
+
 ## Getting started
 
 Needs Ruby 2.7+ and Bundler.

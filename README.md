@@ -43,7 +43,7 @@ Pages build to `about.html` rather than `/about/`. The template's own runtime de
 
 ## Licence
 
-MIT — use it for your church, for a client, commercially, whatever. Attribution appreciated, not required. Bundled typefaces are SIL OFL 1.1; see `core/fonts/FONTS.md`.
+MIT — see [LICENSE](LICENSE). Use it for your church, for a client, commercially, whatever. Attribution appreciated, not required. Bundled typefaces are SIL OFL 1.1; see `core/fonts/FONTS.md`.
 
 Photography in the live demo is from Unsplash and is credited in `CREDITS.md`; the download ships neutral placeholders instead.
 
